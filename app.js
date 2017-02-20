@@ -724,6 +724,35 @@ function sendQuickReply(recipientId) {
 }
 
 /*
+ * Send a message with Quick Reply buttons.
+ *
+ */
+function sendTestMessage(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Welk type toestel gebruikt u?",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"IPHONE",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+        },
+        {
+          "content_type":"text",
+          "title":"ANDROID",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+      ]
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+/*
  * Send a read receipt to indicate the message has been read
  *
  */
