@@ -307,6 +307,10 @@ function receivedMessage(event) {
         sendAccountLinking(senderID);
         break;
 
+      case 'Aan de slag':
+        sendTestMessage(senderID);
+        break;
+        
       default:
         sendTextMessage(senderID, messageText);
     }
