@@ -244,8 +244,11 @@ function receivedMessage(event) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
-
-    sendTextMessage(senderID, "Quick reply tapped");
+    switch (quickReplyPayload) {
+      default:
+        sendTextMessage(senderID, "Quick reply tapped: %s",  quickReplyPayload);
+    }
+    
     return;
   }
 
