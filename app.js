@@ -776,14 +776,6 @@ function sendContactMessage(recipientId) {
         payload: {
           template_type: "button",
           text: "Wij verzoeken u contact met ons op te nemen",
-          address: {
-            street_1: "Flight Forum 1700",
-            street_2: "",
-            city: "Eindhoven",
-            postal_code: "5657EZ",
-            state: "Noord-Brabant",
-            country: "NL"
-          },
           buttons:[{
             type: "web_url",
             url: "https://www.phc.nl/over-ons/contact",
