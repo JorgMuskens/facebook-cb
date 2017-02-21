@@ -260,6 +260,9 @@ function receivedMessage(event) {
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_ANDERS':
         sendTextMessage(senderID, "U heeft een onbekend type ANDROID toestel");
         break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_TERUG':
+        sendStartMessage(senderID);
+        break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_6':
         sendTextMessage(senderID, "U heeft een IPHONE 6 serie toestel");
         break;
@@ -268,6 +271,9 @@ function receivedMessage(event) {
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_OUD':
         sendTextMessage(senderID, "U heeft een ouder type IPHONE toestel");
+        break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_TERUG':
+        sendStartMessage(senderID);
         break;
       default:
         sendTextMessage(senderID, "Quick reply tapped");
@@ -804,6 +810,11 @@ function sendIphoneMessage(recipientId) {
           "title":"oudere versie",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_OUD"
         },
+        {
+          "content_type":"text",
+          "title":"TERUG",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_TERUG"
+        },
       ]
     }
   };
@@ -832,6 +843,11 @@ function sendAndroidMessage(recipientId) {
           "content_type":"text",
           "title":"ANDERS",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_ANDERS"
+        },
+        {
+          "content_type":"text",
+          "title":"ANDERS",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_TERUG"
         },
       ]
     }
