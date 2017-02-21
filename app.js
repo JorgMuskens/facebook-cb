@@ -253,24 +253,30 @@ function receivedMessage(event) {
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_SAMSUNG':
         sendTextMessage(senderID, "U heeft een SAMSUNG toestel");
+        sendContactMessage(senderID);
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_HTC':
         sendTextMessage(senderID, "U heeft een HTC toestel");
+        sendContactMessage(senderID);
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_ANDERS':
         sendTextMessage(senderID, "U heeft een onbekend type ANDROID toestel");
+        sendContactMessage(senderID);
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_TERUG':
         sendStartMessage(senderID);
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_6':
         sendTextMessage(senderID, "U heeft een IPHONE 6 serie toestel");
+        sendContactMessage(senderID);
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_7':
         sendTextMessage(senderID, "U heeft een IPHONE 7 serie toestel");
+        sendContactMessage(senderID);
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_OUD':
         sendTextMessage(senderID, "U heeft een ouder type IPHONE toestel");
+        sendContactMessage(senderID);
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_TERUG':
         sendStartMessage(senderID);
@@ -758,6 +764,35 @@ function sendQuickReply(recipientId) {
 
   callSendAPI(messageData);
 }
+
+function sendContactMessage(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: "Contact Informatie",
+          buttons:[{
+            type: "web_url",
+            url: "https://www.phc.nl/over-ons/contact",
+            title: "Open Web URL"
+          }, {
+            type: "phone_number",
+            title: "Bel ons",
+            payload: "+31402111111"
+          }]
+        }
+      }
+    }
+  };  
+
+  callSendAPI(messageData);
+}
+
 
 /*
  * Send a message with Quick Reply buttons.
