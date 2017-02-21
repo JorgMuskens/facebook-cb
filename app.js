@@ -398,7 +398,7 @@ function receivedPostback(event) {
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
   if (payload == 'START') {
-    sendTestMessage(senderID);
+    sendStartMessage(senderID);
   } else {
     // When a postback is called, we'll send a message back to the sender to 
     // let them know it was successful
@@ -807,7 +807,7 @@ function sendIphoneMessage(recipientId) {
         },
         {
           "content_type":"text",
-          "title":"oudere versie",
+          "title":"OUDER",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_OUD"
         },
         {
@@ -846,7 +846,7 @@ function sendAndroidMessage(recipientId) {
         },
         {
           "content_type":"text",
-          "title":"ANDERS",
+          "title":"TERUG",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_TERUG"
         },
       ]
