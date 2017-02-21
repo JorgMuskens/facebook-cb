@@ -245,16 +245,33 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
     switch (quickReplyPayload) {
-      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_APPLE':
-        sendTextMessage(senderID);
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE':
+        sendIphoneMessage(senderID);
         break;
       case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID':
-        sendTextMessage(senderID);
-        break;  
+        sendAndroidMessage(senderID);
+        break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_SAMSUNG':
+        sendTextMessage(senderID, "U heeft een SAMSUNG toestel");
+        break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_HTC':
+        sendTextMessage(senderID, "U heeft een HTC toestel");
+        break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_ANDERS':
+        sendTextMessage(senderID, "U heeft een onbekend type ANDROID toestel");
+        break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_6':
+        sendTextMessage(senderID, "U heeft een IPHONE 6 serie toestel");
+        break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_7':
+        sendTextMessage(senderID, "U heeft een IPHONE 7 serie toestel");
+        break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_OUD':
+        sendTextMessage(senderID, "U heeft een ouder type IPHONE toestel");
+        break;
       default:
-        sendTextMessage(senderID, "Quick reply tapped",  quickReplyPayload);
+        sendTextMessage(senderID, "Quick reply tapped");
     }
-    
     return;
   }
 
@@ -317,11 +334,11 @@ function receivedMessage(event) {
         break;
 
       case 'Aan de slag':
-        sendTestMessage(senderID);
+        sendStartMessage(senderID);
         break;
         
       default:
-        sendTextMessage(senderID, messageText);
+        sendTextMessage(senderID, "Om de phonehelper te starten kunt u 'Aan de slag' te typen.");
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
@@ -740,7 +757,7 @@ function sendQuickReply(recipientId) {
  * Send a message with Quick Reply buttons.
  *
  */
-function sendTestMessage(recipientId) {
+function sendStartMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -750,8 +767,8 @@ function sendTestMessage(recipientId) {
       quick_replies: [
         {
           "content_type":"text",
-          "title":"APPLE",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_APPLE"
+          "title":"IPHONE",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE"
         },
         {
           "content_type":"text",
@@ -761,7 +778,64 @@ function sendTestMessage(recipientId) {
       ]
     }
   };
+  callSendAPI(messageData);
+}
 
+function sendIphoneMessage(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Ik begrijp dat u een IPHONE gebruikt. Kunt u ook aangeven welke versie?",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"6/6+/6S/6S+",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_6"
+        },
+        {
+          "content_type":"text",
+          "title":"7/7+",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_7"
+        },
+        {
+          "content_type":"text",
+          "title":"oudere versie",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_IPHONE_OUD"
+        },
+      ]
+    }
+  };
+  callSendAPI(messageData);
+}
+
+function sendAndroidMessage(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Ik begrijp dat u een ANDROID gebruikt. Kunt u ook aangeven welke merk?",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"SAMSUNG",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_SAMSUNG"
+        },
+        {
+          "content_type":"text",
+          "title":"HTC",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_HTC"
+        },
+        {
+          "content_type":"text",
+          "title":"ANDERS",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID_ANDERS"
+        },
+      ]
+    }
+  };
   callSendAPI(messageData);
 }
 
