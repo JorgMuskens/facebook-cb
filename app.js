@@ -245,8 +245,14 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
     switch (quickReplyPayload) {
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_APPLE':
+        sendTextMessage(senderID);
+        break;
+      case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID':
+        sendTextMessage(senderID);
+        break;  
       default:
-        sendTextMessage(senderID, "Quick reply tapped: %s",  quickReplyPayload);
+        sendTextMessage(senderID, "Quick reply tapped",  quickReplyPayload);
     }
     
     return;
@@ -368,9 +374,13 @@ function receivedPostback(event) {
   console.log("Received postback for user %d and page %d with payload '%s' " + 
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
-  // When a postback is called, we'll send a message back to the sender to 
-  // let them know it was successful
-  sendTextMessage(senderID, "Postback called");
+  if (payload == 'START') {
+    sendTestMessage(senderID);
+  } else {
+    // When a postback is called, we'll send a message back to the sender to 
+    // let them know it was successful
+    sendTextMessage(senderID, "Postback called");  
+  }
 }
 
 /*
@@ -740,13 +750,13 @@ function sendTestMessage(recipientId) {
       quick_replies: [
         {
           "content_type":"text",
-          "title":"IPHONE",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+          "title":"APPLE",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_APPLE"
         },
         {
           "content_type":"text",
           "title":"ANDROID",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANDROID"
         },
       ]
     }
